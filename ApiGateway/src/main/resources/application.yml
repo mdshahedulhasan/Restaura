@@ -1,0 +1,64 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: '*'
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders: '*'
+            maxAge: 30
+
+      routes:
+        - id: OrderPlacementService
+          uri: lb://ORDERPLACEMENTSERVICE
+          predicates:
+            - Path=/orders/**, /swagger-ui/**
+          filters:
+              - AuthenticationFilter
+#
+#        - id: DoctorService
+#          uri: lb://DOCTORSERVICE
+#          predicates:
+#            - Path=/doctor/**
+#          filters:
+#            - AuthenticationFilter
+#
+#        - id: AppointmentService
+#          uri: lb://APPOINTMENTSERVICE
+#          predicates:
+#            - Path=/appointment/**
+#          filters:
+#            - AuthenticationFilter
+#
+#        - id: AdminService
+#          uri: lb://ADMINSERVICE
+#          predicates:
+#            - Path=/admin/**
+#          filters:
+#            - AuthenticationFilter
+#
+        - id: AuthenticationService
+          uri: lb://AUTHENTICATIONSERVICE
+          predicates:
+            - Path=/auth/**
+#
+#
+#
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone : http://localhost:8765/eureka
+
+  main:
+    web-application-type: reactive
+
+security:
+  jwt:
+    secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+    expiration-time: 7200000

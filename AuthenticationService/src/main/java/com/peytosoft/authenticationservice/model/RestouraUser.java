@@ -31,6 +31,10 @@ public class RestouraUser implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> authorities;
 
+    public List<String> getAuths(){
+        return authorities.stream().map(role -> "ROLE_" + role.toUpperCase()).collect(Collectors.toList());
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities.stream().map(role-> new SimpleGrantedAuthority("ROLE_"+role.toUpperCase())).collect(Collectors.toList());

@@ -1,6 +1,6 @@
 package com.restaura.customerservice.controller;
 
-import com.restaura.customerservice.entities.Customer;
+import com.restaura.customerservice.dto.CustomerDTO;
 import com.restaura.customerservice.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -17,24 +16,24 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping
-    public List<Customer> getAllCustomers() {
-        return customerService.getAllCustomers();
+    public ResponseEntity<List<CustomerDTO>> getAllCustomers() {
+        return ResponseEntity.ok(customerService.getAllCustomers());
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) {
-        Optional<Customer> customer = customerService.getCustomerByEmail(email);
-        return customer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<CustomerDTO> getCustomerByEmail(@PathVariable String email) {
+        Optional<CustomerDTO> customerDTO = customerService.getCustomerByEmail(email);
+        return customerDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return customerService.createCustomer(customer);
+    public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO) {
+        return ResponseEntity.ok(customerService.createCustomer(customerDTO));
     }
 
     @PutMapping("/{email}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable String email, @RequestBody Customer customerDetails) {
-        Optional<Customer> updatedCustomer = customerService.updateCustomer(email, customerDetails);
+    public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable String email, @RequestBody CustomerDTO customerDetails) {
+        Optional<CustomerDTO> updatedCustomer = customerService.updateCustomer(email, customerDetails);
         return updatedCustomer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -44,3 +43,4 @@ public class CustomerController {
         return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }
+

@@ -1,5 +1,6 @@
 package com.restaura.customerservice.controller;
 
+import com.restaura.customerservice.dto.CustomerDTO;
 import com.restaura.customerservice.entities.Address;
 import com.restaura.customerservice.entities.Customer;
 import com.restaura.customerservice.repository.CustomerRepository;
@@ -24,6 +25,12 @@ public class TestController {
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         System.out.println(customer);
         return ResponseEntity.ok().body(customer);
+    }
+    @PostMapping
+    public CustomerDTO createCustomer(@RequestBody CustomerDTO customerDTO) {
+        return customerService.TestcreateCustomer(customerDTO);
+
+
     }
 
     @GetMapping("")

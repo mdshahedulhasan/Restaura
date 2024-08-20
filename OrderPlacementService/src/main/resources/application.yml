@@ -15,7 +15,14 @@ spring:
   data:
     jdbc:
       dialect: postgresql
-
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+
+server:
+  port: 8081
+
+eureka:
+  instance:
+    hostname: localhost
+

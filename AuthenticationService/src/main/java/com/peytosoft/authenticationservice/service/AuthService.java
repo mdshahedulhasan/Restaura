@@ -8,9 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class AuthService {
@@ -45,7 +49,11 @@ public class AuthService {
 
         try{
             UserDetails authenticatedUser = authenticate(loginRequest);
-            String token = jwtService.generateToken(authenticatedUser);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("authorities", authenticatedUser.getAuthorities());
+            System.out.println(authenticatedUser);
+            System.out.println(map);
+            String token = jwtService.generateToken(map, authenticatedUser);
             LoginResponse loginResponse =  new LoginResponse(token, jwtService.getJwtExpiration());
             return new ResponseEntity<>(loginResponse, HttpStatus.OK);
         }
