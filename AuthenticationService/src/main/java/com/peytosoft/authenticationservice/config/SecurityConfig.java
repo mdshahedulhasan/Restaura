@@ -30,7 +30,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequest ->
                         authorizeRequest
                                 .requestMatchers("auth/**",
-//                                        "test/**",
                                         "/v3/api-docs",
                                         "/configuration/ui",
                                         "/swagger-resources/**",
@@ -40,12 +39,13 @@ public class SecurityConfig {
                                 .anyRequest().authenticated()
 
                 )
+
                 .exceptionHandling(ex-> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
+
                 .csrf(csrf->csrf.disable())
                 .cors(cors->cors.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-        ;
 
         return httpSecurity.build();
 
