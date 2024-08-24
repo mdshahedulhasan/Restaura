@@ -1,0 +1,7 @@
+{
+  "orderId": 1,
+  "customerId": "5432",
+  "restaurantId": "1256",
+  "pickupTime": "tomorrow",
+  "status": "pending"
+}

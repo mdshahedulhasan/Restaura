@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/orderplacement
+    url: jdbc:postgresql://localhost:5432/orderplacementdb
     username: postgres
     password: root
 
@@ -24,5 +24,11 @@ server:
 
 eureka:
   instance:
-    hostname: localhost
+    prefer-ip-address: true
+
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
 

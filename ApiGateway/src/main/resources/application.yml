@@ -19,7 +19,13 @@ spring:
           predicates:
             - Path=/orders/**, /swagger-ui/**
           filters:
-              - AuthenticationFilter
+#              - AuthenticationFilter
+        - id: CustomerService
+          uri: lb://CUSTOMERSERVICE
+          predicates:
+            - Path=/customers/**, /swagger-ui/**
+          filters:
+#              - AuthenticationFilter
 #
 #        - id: DoctorService
 #          uri: lb://DOCTORSERVICE
@@ -50,10 +56,15 @@ spring:
 #
 #
 
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone : http://localhost:8765/eureka
+eureka:
+  instance:
+    prefer-ip-address: true
+
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
 
   main:
     web-application-type: reactive

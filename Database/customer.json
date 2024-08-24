@@ -1,0 +1,30 @@
+{
+  "name": "Saidur Rahman",
+  "email": "saidur.eee.buet@gmail.com",
+  "addresses": [
+    {
+      "id": 3,
+      "addressLine1": "DSC",
+      "addressLine2": "Apt 4B",
+      "city": "New York",
+      "state": "NY",
+      "postalCode": "10001",
+      "country": "Bangladesh",
+      "customer": "saidur.eee.buet@gmail.com"
+    },
+    {
+      "id": 4,
+      "addressLine1": "SWH",
+      "addressLine2": "",
+      "city": "Los Angeles",
+      "state": "CA",
+      "postalCode": "90001",
+      "country": "Bangladesh",
+      "customer": "saidur.eee.buet@gmail.com"
+    }
+  ],
+  "age": 25,
+  "occupation": "Electrical Engineer",
+  "sex": "Male",
+  "contactNo": "+8801761610711"
+}

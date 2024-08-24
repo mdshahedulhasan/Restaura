@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=${YOUR_USERNAME}
+      - POSTGRES_PASSWORD=${YOUR_PASSWORD}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/${YOUR_DB_NAME}
+      - SPRING_DATASOURCE_USERNAME=${YOUR_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${YOUR_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "${LOCAL_PORT}:${DOCKER_PORT}"
+
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      - POSTGRES_USER=${YOUR_USERNAME}
+      - POSTGRES_PASSWORD=${YOUR_PASSWORD}
+      - POSTGRES_DB=${YOUR_DB_NAME}
+    ports:
+      - "${LOCAL_PORT}:${DOCKER_PORT}"
+
+
+.env file,
+
+YOUR_USERNAME=postgres_user
+YOUR_PASSWORD=secret_password
+YOUR_DB_NAME=orderservice
+LOCAL_PORT=5432
+DOCKER_PORT=5432
+
+
+docker run -d -p 8081:8081 --name=order-placement-service --network restouracombined_test_network 9fa36a06a17e
