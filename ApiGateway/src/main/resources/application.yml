@@ -26,36 +26,11 @@ spring:
             - Path=/customers/**, /swagger-ui/**
           filters:
 #              - AuthenticationFilter
-#
-#        - id: DoctorService
-#          uri: lb://DOCTORSERVICE
-#          predicates:
-#            - Path=/doctor/**
-#          filters:
-#            - AuthenticationFilter
-#
-#        - id: AppointmentService
-#          uri: lb://APPOINTMENTSERVICE
-#          predicates:
-#            - Path=/appointment/**
-#          filters:
-#            - AuthenticationFilter
-#
-#        - id: AdminService
-#          uri: lb://ADMINSERVICE
-#          predicates:
-#            - Path=/admin/**
-#          filters:
-#            - AuthenticationFilter
-#
+
         - id: AuthenticationService
           uri: lb://AUTHENTICATIONSERVICE
           predicates:
             - Path=/auth/**
-#
-#
-#
-
 eureka:
   instance:
     prefer-ip-address: true
